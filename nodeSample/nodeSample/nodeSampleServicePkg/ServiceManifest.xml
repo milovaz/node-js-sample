@@ -10,7 +10,7 @@
    <CodePackage Name="code" Version="1.0.0">
       <EntryPoint>
          <ContainerHost>
-            <ImageName>registry.hub.docker.com/milovaz/experimental:1</ImageName>
+            <ImageName>moeda3.azurecr.io/milovaz/node-js-sample</ImageName>
             <Commands></Commands>
          </ContainerHost>
       </EntryPoint>

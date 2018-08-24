@@ -6,6 +6,7 @@
       <ServiceManifestRef ServiceManifestName="nodeSampleServicePkg" ServiceManifestVersion="1.0.0" />
         <Policies>
             <ContainerHostPolicies CodePackageRef="Code">
+            		<RepositoryCredentials AccountName="moeda3" Password="BEddr3g7c+WoKduCAyQPbfOa8Vo7HQ40" PasswordEncrypted="false"/>
                 <PortBinding ContainerPort="5000" EndpointRef="nodeSampleServiceEndpoint"/>
             </ContainerHostPolicies>
         </Policies>
@@ -13,6 +14,11 @@
    
    <DefaultServices>
       <Service Name="nodeSampleService">
+         <StatelessService ServiceTypeName="nodeSampleServiceType" InstanceCount="1">
+            <SingletonPartition />
+         </StatelessService>
+      </Service>
+      <Service Name="nodeSampleServiceDev">
          <StatelessService ServiceTypeName="nodeSampleServiceType" InstanceCount="1">
             <SingletonPartition />
          </StatelessService>
