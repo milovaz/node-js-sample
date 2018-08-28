@@ -1,4 +1,5 @@
-FROM compulim/nanoserver-node
+#FROM compulim/nanoserver-node
+FROM node
 
 # Create app directory
 WORKDIR /usr/src/app
