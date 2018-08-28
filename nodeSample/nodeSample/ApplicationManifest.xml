@@ -17,11 +17,6 @@
             <SingletonPartition />
          </StatelessService>
       </Service>
-      <Service Name="nodeSampleServiceDev">
-         <StatelessService ServiceTypeName="nodeSampleServiceType" InstanceCount="1">
-            <SingletonPartition />
-         </StatelessService>
-      </Service>
    </DefaultServices>
    
 </ApplicationManifest>
