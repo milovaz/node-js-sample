@@ -1,7 +1,7 @@
 version: '3'
+
 services:
   web: 
-    build: .
-    image: milovaz/node-js-sample
+    image: milovaz/node-js-sample:22
     ports:
     - "5000:5000"
