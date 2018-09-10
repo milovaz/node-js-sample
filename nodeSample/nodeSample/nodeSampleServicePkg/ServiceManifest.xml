@@ -10,7 +10,7 @@
    <CodePackage Name="code" Version="1.0.0">
       <EntryPoint>
          <ContainerHost>
-            <ImageName>milovaz/node-js-sample:22</ImageName>
+            <ImageName>moeda3.azurecr.io/node-js-sample:22</ImageName>
             <Commands></Commands>
          </ContainerHost>
       </EntryPoint>
