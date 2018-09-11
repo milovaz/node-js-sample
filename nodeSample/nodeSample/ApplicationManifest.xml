@@ -7,7 +7,6 @@
         <Policies>
             <ContainerHostPolicies CodePackageRef="Code">
                 <PortBinding ContainerPort="5000" EndpointRef="nodeSampleServiceEndpoint"/>
-		<RepositoryCredentials AccountName="moeda3" Password="BEddr3g7c+WoKduCAyQPbfOa8Vo7HQ40" PasswordEncrypted="false"/>
             </ContainerHostPolicies>
         </Policies>
    </ServiceManifestImport>
