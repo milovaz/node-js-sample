@@ -6,7 +6,9 @@ pipeline {
             
         stage('Git') {
           steps {
-            scmVars = checkout scm
+              script {    
+                scmVars = checkout scm
+              }
           }
         }
             
