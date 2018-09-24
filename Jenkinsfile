@@ -1,6 +1,7 @@
 pipeline {
     agent any
     tools {nodejs "node"}
+    @Library('git-feedback-shared-library')
     stages {
             
         stage('Git') {
@@ -8,6 +9,7 @@ pipeline {
               script {
                 env.scmVars = checkout scm
                 echo "${env.scmVars}"
+                sayHello 'Chewei'
               }
           }
         }
