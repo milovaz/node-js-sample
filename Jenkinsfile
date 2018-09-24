@@ -8,7 +8,7 @@ pipeline {
               script {
                 env.scmVars = checkout scm
                 echo "${env.scmVars}"
-                sayHello 'Chewei'
+                informGitDeployment(env.scmVars)
               }
           }
         }
