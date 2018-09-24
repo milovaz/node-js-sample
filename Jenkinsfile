@@ -5,7 +5,8 @@ pipeline {
             
         stage('Git') {
           steps {
-            checkout scm
+            env.scmVars = checkout scm
+              echo "${env.scmVars}"
           }
         }
             
