@@ -6,9 +6,9 @@ pipeline {
         stage('Git') {
           steps {
               script {
-                env.scmVars = checkout scm
-                echo "${env.scmVars}"
-                sayHello(env.scmVars.GIT_COMMIT)
+                //env.scmVars = checkout scm
+                //echo "${env.scmVars}"
+                checkoutHello
               }
           }
         }
