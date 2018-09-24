@@ -1,12 +1,13 @@
 pipeline {
     agent any
-    
     tools {nodejs "node"}
     stages {
             
         stage('Git') {
           steps {
-            informGitDeployment 'milovaz'
+              script {
+                informGitDeployment 'milovaz'
+              }
           }
         }
             
