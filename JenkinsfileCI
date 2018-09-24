@@ -5,7 +5,8 @@ pipeline {
             
         stage('Git') {
           steps {   
-            checkoutHello
+            checkoutHello()
+            echo "${env.GIT_COMMIT}"
           }
         }
             
