@@ -1,14 +1,11 @@
 pipeline {
-    environment {
-        SCMVar = checkout scm
-    }
     agent any
     tools {nodejs "node"}
     stages {
             
         stage('Git') {
           steps {   
-            echo "$SCMVar.GIT_BRANCH"
+            checkoutHello
           }
         }
             
