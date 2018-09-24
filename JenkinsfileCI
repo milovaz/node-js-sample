@@ -6,13 +6,11 @@ pipeline {
     tools {nodejs "node"}
     stages {
             
-        /*stage('Git') {
-          steps {
-            script {
-                
-            }
+        stage('Git') {
+          steps {   
+            sayHello "$SCMVar.GIT_COMMIT"
           }
-        }*/
+        }
             
         stage('Build') {
           steps {
