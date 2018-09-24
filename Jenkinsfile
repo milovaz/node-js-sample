@@ -6,7 +6,7 @@ pipeline {
             
         stage('Git') {
           steps {
-            git 'https://github.com/milovaz/node-js-sample.git'
+            informGitDeployment 'milovaz'
           }
         }
             
