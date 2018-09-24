@@ -6,7 +6,7 @@ pipeline {
         stage('Git') {
           steps {
               script {
-                informGitDeployment 'milovaz'
+                checkoutRepository 'milovaz'
               }
           }
         }
@@ -19,8 +19,14 @@ pipeline {
          
         stage('Test') {
           steps {
-             sh 'npm test'
+            sh 'npm test'
           }
         }      
+        
+        stage('Deploy') {
+          steps {
+            informGitDeployment(env.REPO_OWNER, env.REPO_NAME, env.DEPLOYMENT_ID)
+          }  
+        }
     }
 }
