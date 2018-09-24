@@ -1,14 +1,18 @@
 pipeline {
+    environment {
+        SCMVar = checkout scm
+    }
     agent any
-    
     tools {nodejs "node"}
     stages {
             
-        stage('Git') {
+        /*stage('Git') {
           steps {
-            checkout scm
+            script {
+                
+            }
           }
-        }
+        }*/
             
         stage('Build') {
           steps {
