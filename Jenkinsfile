@@ -1,4 +1,3 @@
-@Library('git-feedback-shared-library')
 pipeline {
     agent any
     tools {nodejs "node"}
