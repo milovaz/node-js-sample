@@ -1,7 +1,7 @@
+@Library('git-feedback-shared-library')
 pipeline {
     agent any
     tools {nodejs "node"}
-    @Library('git-feedback-shared-library')
     stages {
             
         stage('Git') {
