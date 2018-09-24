@@ -1,12 +1,12 @@
 pipeline {
     agent any
-    
+    def scmVars
     tools {nodejs "node"}
     stages {
             
         stage('Git') {
           steps {
-            checkout scm
+            scmVars = checkout scm
           }
         }
             
