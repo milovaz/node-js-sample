@@ -1,22 +1,24 @@
-node {
-    def scmVars
+pipeline {
+    agent any
     tools {nodejs "node"}
-    
-    stage('Git') {
-      steps { 
-        scmVars = checkout scm
-      }
+    stages {
+            
+        stage('Git') {
+          steps {
+            checkout scm
+          }
+        }
+            
+        stage('Build') {
+          steps {
+            sh 'npm install'
+          }
+        }
+         
+        stage('Test') {
+          steps {
+             sh 'npm test'
+          }
+        }      
     }
-
-    stage('Build') {
-      steps {
-        sh 'npm install'
-      }
-    }
-
-    stage('Test') {
-      steps {
-         sh 'npm test'
-      }
-    }      
 }
