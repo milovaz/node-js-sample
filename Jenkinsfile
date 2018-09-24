@@ -8,7 +8,7 @@ pipeline {
               script {
                 env.scmVars = checkout scm
                 echo "${env.scmVars}"
-                sayHello("${env.scmVars.GIT_COMMIT}")
+                sayHello(env.scmVars.GIT_COMMIT)
               }
           }
         }
