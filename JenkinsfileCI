@@ -8,7 +8,7 @@ pipeline {
             
         stage('Git') {
           steps {   
-            sayHello SCMVar
+            sayHello SCMVar.GIT_BRANCH
           }
         }
             
