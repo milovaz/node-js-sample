@@ -8,7 +8,7 @@ pipeline {
             
         stage('Git') {
           steps {   
-            sayHello "$SCMVar.GIT_COMMIT"
+            sayHello SCMVar
           }
         }
             
