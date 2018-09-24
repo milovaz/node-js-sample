@@ -6,8 +6,6 @@ pipeline {
         stage('Git') {
           steps {
               script {
-                //env.scmVars = checkout scm
-                //echo "${env.scmVars}"
                 informGitDeployment 'milovaz'
               }
           }
