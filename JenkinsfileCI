@@ -1,12 +1,12 @@
 pipeline {
     agent any
-    
     tools {nodejs "node"}
     stages {
             
         stage('Git') {
-          steps {
-            checkout scm
+          steps {   
+            checkoutHello()
+            echo "${env.GIT_COMMIT}"
           }
         }
             
