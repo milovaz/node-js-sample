@@ -1,0 +1,6 @@
+{
+  "generator-sfmicroservice": {
+    "projName": "nodeSample",
+    "baseInfraPath": "infra"
+  }
+}
