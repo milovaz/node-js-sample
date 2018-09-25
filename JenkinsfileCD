@@ -6,28 +6,61 @@ pipeline {
         stage('Git') {
           steps {
               script {
-                checkoutRepository 'milovaz'
+                checkoutRepository()
               }
           }
         }
-            
-        stage('Build') {
+        
+        stage('Update artifacts') {
           steps {
-            sh 'npm install'
+            azureServiceFabricUpdateArtifacts applicationManifestPath: 'infra/nodeSample/ApplicationManifest.xml', serviceManifestPath: 'infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml', serviceTargetVersion: "$BUILD_NUMBER", applicationTargetVersion: "$BUILD_NUMBER"
+          }  
+        }
+        
+        stage('Build') {
+          steps{
+            script {
+                registry = sh (returnStdout: true, script: '''#!/bin/bash
+                image_name=$(grep -oP \'<ImageName>\\K[^<]*\' infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml)
+                echo $image_name''').trim()
+            }
+            script {
+                dockerImage = docker.build registry
+            }
           }
         }
-         
-        stage('Test') {
-          steps {
-            sh 'npm test'
-          }
-        }      
         
-        stage('Deploy') {
+        stage('Deploy Image') {
+          steps{
+             script {
+                docker.withRegistry('https://moeda3.azurecr.io', 'acr-credentials') {
+                dockerImage.push()
+              }
+            }
+          }
+        }
+        
+        stage('Deploy to service fabric') {
+           steps {
+               script {
+                    env.APP_TYPE_NAME = sh returnStdout: true, script: '''#!/bin/bash
+                                                                    app_manifest="$APP_MANIFEST_PATH"
+                                                                    application_version=$(grep -oP \'ApplicationTypeName="\\K[^"]*\' $app_manifest) 
+                                                                    echo $application_version'''
+                    env.APP_NAME = sh returnStdout: true, script: '''#!/bin/bash
+                                                                    application_name=$(echo "$APP_TYPE_NAME" | sed -r 's/Type//g') 
+                                                                    echo $application_name'''                        
+                }
+                azureServiceFabricPublish applicationName: 'fabric:/$APP_NAME', applicationType: '$APP_TYPE_NAME', azureCredentialsId: '', clientCert: "$JENKINS_HOME/cert.pem", clientKey: "$JENKINS_HOME/key_unencrypted.pem", configureType: 'fill', managementHost: 'moeda-cluster.brazilsouth.cloudapp.azure.com', manifestPath: 'infra/nodeSample/ApplicationManifest.xml', resourceGroup: '', serviceFabric: ''
+           }
+        }
+        
+        stage('Inform Deploy') {
           steps {
             informGitDeployment(env.REPO_OWNER, env.REPO_NAME, env.DEPLOYMENT_ID)
           }  
         }
+        
         stage('Slack Message') {
           steps {
             slackSend channel: '@thiagomilo',
