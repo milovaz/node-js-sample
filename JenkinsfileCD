@@ -49,9 +49,10 @@ pipeline {
                                                                     echo $application_version'''
                     env.APP_NAME = sh returnStdout: true, script: '''#!/bin/bash
                                                                     application_name=$(echo "$APP_TYPE_NAME" | sed -r 's/Type//g') 
-                                                                    echo $application_name'''                        
+                                                                    echo $application_name'''   
+                    env.APP_NAME = 'fabric:/' + env.APP_NAME
                 }
-                azureServiceFabricPublish applicationName: 'fabric:/nodeSample', applicationType: 'nodeSampleType', azureCredentialsId: '', clientCert: "$JENKINS_HOME/cert.pem", clientKey: "$JENKINS_HOME/key_unencrypted.pem", configureType: 'fill', managementHost: 'moeda-cluster.brazilsouth.cloudapp.azure.com', manifestPath: 'infra/nodeSample/ApplicationManifest.xml', resourceGroup: '', serviceFabric: '', environmentType: "${env.GIT_BRANCH}"
+                azureServiceFabricPublish applicationName: "${env.APP_NAME}", applicationType: "${env.APP_TYPE_NAME}", azureCredentialsId: '', clientCert: "$JENKINS_HOME/cert.pem", clientKey: "$JENKINS_HOME/key_unencrypted.pem", configureType: 'fill', managementHost: 'moeda-cluster.brazilsouth.cloudapp.azure.com', manifestPath: 'infra/nodeSample/ApplicationManifest.xml', resourceGroup: '', serviceFabric: '', environmentType: "${env.GIT_BRANCH}"
            }
         }
         
