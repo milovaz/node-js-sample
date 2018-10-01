@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ApplicationManifest  ApplicationTypeName="nodeSampleType" ApplicationTypeVersion="1.0.0"
-                      xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-   
+<ApplicationManifest  ApplicationTypeName="nodeSampleType" ApplicationTypeVersion="1.0.20"
+                      xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">   
+
+    <Parameters>
+      <Parameter Name="Name" DefaultValue=""/>
+    </Parameters>
+
    <ServiceManifestImport>
-      <ServiceManifestRef ServiceManifestName="nodeSampleServicePkg" ServiceManifestVersion="1.0.0" />
+      <ServiceManifestRef ServiceManifestName="nodeSampleServicePkg" ServiceManifestVersion="1.0.20" />
         <Policies>
             <ContainerHostPolicies CodePackageRef="Code">
-                <PortBinding EndpointRef="nodeSampleEndpoint"/>
+                <PortBinding ContainerPort="5001" EndpointRef="nodeSampleEndpoint"/>
+                <RepositoryCredentials AccountName="moeda3" Password="BEddr3g7c+WoKduCAyQPbfOa8Vo7HQ40" PasswordEncrypted="false"/>
             </ContainerHostPolicies>
         </Policies>
+    
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="JENKINS_NAME_TESTE" Value="[Name]"/>
+    </EnvironmentOverrides>
+    
    </ServiceManifestImport>
    
    <DefaultServices>
@@ -18,5 +28,10 @@
          </StatelessService>
       </Service>
    </DefaultServices>
-   
+  
+
+  <Certificates>
+    <SecretsCertificate Name="dataenciphermentcert" X509FindType="FindByThumbprint" X509FindValue="92D5787DB4FEBACD098818133F7152ED89CFCF70"/>
+  </Certificates>
+
 </ApplicationManifest>
