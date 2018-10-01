@@ -11,7 +11,7 @@
       <EntryPoint>
          <ContainerHost>
             <ImageName>moeda3.azurecr.io/node-js-sample</ImageName>
-            <Commands></Commands>
+            <Commands>sh, docker-entrypoint.sh</Commands>
          </ContainerHost>
       </EntryPoint>
       <EnvironmentVariables> 
