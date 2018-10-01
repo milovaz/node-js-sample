@@ -20,7 +20,7 @@
    </CodePackage>
    <Resources>
         <Endpoints>
-            <Endpoint Name="nodeSampleEndpoint" UriScheme="http" Port="5001" Protocol="http"/>
+            <Endpoint Name="nodeSampleEndpoint" UriScheme="http" Protocol="http"/>
         </Endpoints>
     </Resources>
  </ServiceManifest>
