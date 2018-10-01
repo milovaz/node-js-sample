@@ -13,7 +13,7 @@ pipeline {
         
         stage('Update artifacts') {
           steps {
-            azureServiceFabricUpdateArtifacts applicationManifestPath: 'infra/nodeSample/ApplicationManifest.xml', serviceManifestPath: 'infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml', serviceTargetVersion: "$BUILD_NUMBER", applicationTargetVersion: "$BUILD_NUMBER", credentials: 'acr-credentials', repositoryName: "node-sample", environmentType: "$GIT_BRANCH" 
+            azureServiceFabricUpdateArtifacts applicationManifestPath: 'infra/nodeSample/ApplicationManifest.xml', serviceManifestPath: 'infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml', serviceTargetVersion: "$BUILD_NUMBER", applicationTargetVersion: "$BUILD_NUMBER", credentials: 'acr-credentials', repositoryName: "$REPO_NAME", environmentType: "$GIT_BRANCH" 
           }  
         }
         
