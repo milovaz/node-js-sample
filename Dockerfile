@@ -17,9 +17,9 @@ RUN npm install dotenv
 # Bundle app source
 COPY . .
 
-#COPY docker-entrypoint.sh /usr/local/bin/
-#RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
-#    && ln -s /usr/local/bin/docker-entrypoint.sh /
-#ENTRYPOINT ["docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
+    && ln -s /usr/local/bin/docker-entrypoint.sh /
+ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 5000
-CMD [ "npm", "start" ]
+#CMD [ "npm", "start" ]

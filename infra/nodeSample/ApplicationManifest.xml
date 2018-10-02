@@ -7,6 +7,7 @@
         <Policies>
             <ContainerHostPolicies CodePackageRef="Code">
                 <PortBinding EndpointRef="nodeSampleEndpoint"/>
+                <CertificateRef Name="MyCert1" X509StoreName="My" X509FindValue="92D5787DB4FEBACD098818133F7152ED89CFCF70" />
             </ContainerHostPolicies>
         </Policies>
    </ServiceManifestImport>
