@@ -6,7 +6,7 @@
       <ServiceManifestRef ServiceManifestName="nodeSampleServicePkg" ServiceManifestVersion="1.0.0" />
         <Policies>
             <ContainerHostPolicies CodePackageRef="Code">
-                <PortBinding EndpointRef="nodeSampleEndpoint"/>
+                <PortBinding ContainerPort="5000" EndpointRef="nodeSampleEndpoint"/>
             </ContainerHostPolicies>
         </Policies>
    </ServiceManifestImport>
