@@ -13,7 +13,7 @@ pipeline {
         
         stage('Update artifacts') {
           steps { 
-            azureServiceFabricUpdateArtifacts applicationManifestPath: 'infra/nodeSample/ApplicationManifest.xml', serviceManifestPath: 'infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml', serviceTargetVersion: "$BUILD_NUMBER", applicationTargetVersion: "$BUILD_NUMBER", credentials: 'acr-credentials', repositoryName: 'node-sample', environmentType: 'prod', passwordEncrypted: 'false' 
+            azureServiceFabricUpdateArtifacts applicationManifestPath: 'infra/nodeSample/ApplicationManifest.xml', serviceManifestPath: 'infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml', serviceTargetVersion: "$BUILD_NUMBER", applicationTargetVersion: "$BUILD_NUMBER", credentials: 'acr-credentials', repositoryName: 'node-js-sample', environmentType: 'prod', passwordEncrypted: 'false' 
           }  
         }
         
@@ -42,7 +42,7 @@ pipeline {
         
         stage('Deploy to service fabric') {
            steps {
-                azureServiceFabricPublish applicationName: 'fabric:/nodeSample', applicationType: "nodeSampleType", azureCredentialsId: '', clientCert: "$JENKINS_HOME/cert.pem", clientKey: "$JENKINS_HOME/key_unencrypted.pem", configureType: 'fill', managementHost: 'moeda-cluster.brazilsouth.cloudapp.azure.com', manifestPath: 'infra/nodeSample/ApplicationManifest.xml', resourceGroup: '', serviceFabric: '', repositoryName: 'node-sample', environmentType: 'prod'
+                azureServiceFabricPublish applicationName: 'fabric:/nodeSample', applicationType: "nodeSampleType", azureCredentialsId: '', clientCert: "$JENKINS_HOME/cert.pem", clientKey: "$JENKINS_HOME/key_unencrypted.pem", configureType: 'fill', managementHost: 'moeda-cluster.brazilsouth.cloudapp.azure.com', manifestPath: 'infra/nodeSample/ApplicationManifest.xml', resourceGroup: '', serviceFabric: '', repositoryName: 'node-js-sample', environmentType: 'prod'
            }
         }
         
