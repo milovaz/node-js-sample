@@ -32,6 +32,7 @@ pipeline {
           steps{
             script {
                 registry = registry + ":$NEW_VERSION"
+                echo registry
             }
             /*script {
                 dockerImage = docker.build registry
