@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+        registry = "moeda3.azurecr.io/node-js-sample"
+        service = 'nodeSample'
+    }
     agent any
     tools {nodejs "node"}
     stages {
@@ -13,24 +17,29 @@ pipeline {
         
         stage('Update artifacts') {
           steps { 
-            azureServiceFabricUpdateArtifacts applicationManifestPath: 'infra/nodeSample/ApplicationManifest.xml', serviceManifestPath: 'infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml', serviceTargetVersion: "$BUILD_NUMBER", applicationTargetVersion: "$BUILD_NUMBER", credentials: 'acr-credentials', repositoryName: 'node-js-sample', environmentType: 'prod', passwordEncrypted: 'false' 
+            script {
+                //env.RETURN = sh returnStdout: true, script: '~/scripts/deploymicroservice -i moeda3.azurecr.io/projects:2 -s projects-dev -r 1 -p 5004:5000'
+                //echo "$RETURN"
+                def values = [1, 0, 0] as int[]
+                def vIndex = ("$GIT_BRANCH" ==~ /dev(elop)?|(staging|relese)/) ? values.length - 1 : values.length - 2
+                values[vIndex] = "$BUILD_NUMBER" as Integer
+                env.NEW_VERSION = values.join('.')
+            }
           }  
         }
         
         stage('Build') {
           steps{
             script {
-                registry = sh (returnStdout: true, script: '''#!/bin/bash
-                image_name=$(grep -oP \'<ImageName>\\K[^<]*\' infra/nodeSample/nodeSampleServicePkg/ServiceManifest.xml)
-                echo $image_name''').trim()
+                registry = registry + ":$NEW_VERSION"
             }
-            script {
+            /*script {
                 dockerImage = docker.build registry
-            }
+            }*/
           }
         }
         
-        stage('Deploy Image') {
+        /*stage('Deploy Image') {
           steps{
              script {
                 docker.withRegistry('https://moeda3.azurecr.io', 'acr-credentials') {
@@ -50,7 +59,7 @@ pipeline {
           steps {
             informGitDeployment(env.REPO_OWNER, env.REPO_NAME, env.DEPLOYMENT_ID)
           }  
-        }
+        }*/
     }
     post {
         always {
